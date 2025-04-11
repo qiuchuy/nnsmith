@@ -51,7 +51,7 @@ def set_seed(seed: int, names: List = None):
         SEED_SETTERS[name](seed)
 
 
-def mkdir(dir: os.PathLike, yes=False):
+def mkdir(dir: os.PathLike, yes=True):
     if os.path.exists(dir):
         decision = ""
         if yes:
