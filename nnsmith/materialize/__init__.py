@@ -214,7 +214,7 @@ class Model(ABC):
     def init(name, backend_target=None) -> Type["Model"]:
         if name is None:
             raise ValueError(
-                "Model type cannot be None. Use `model.type=[torch|onnx|tensorflow]`."
+                "Model type cannot be None. Use `model.type=[torch|onnx|tensorflow|c]`."
             )
 
         if name == "torch":
@@ -237,6 +237,9 @@ class Model(ABC):
                 # XLA must align device location of eager mode execution.
                 return TFModelCUDA
             return TFModelCPU
+        elif name == "c":
+            from nnsmith.materialize.c import CModel
+            return CModel
 
         raise ValueError(
             f"Unsupported: ModelType={name} for BackendTarget={backend_target}"

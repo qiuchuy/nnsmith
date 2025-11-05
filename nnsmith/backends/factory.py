@@ -427,5 +427,9 @@ class BackendFactory(ABC):
             from nnsmith.backends.pt2 import PT2
 
             return PT2(target=target, optmax=optmax, ad=ad, **kwargs)
+        elif name == "c":
+            from nnsmith.backends.c import CBackend
+
+            return CBackend(target=target, optmax=optmax, **kwargs)
         else:
             raise ValueError(f"unknown backend: {name}")
